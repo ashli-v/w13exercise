@@ -40,24 +40,6 @@ function closeModal(modalId) {
     modal.style.display = "none";
 }
 
-// Function to Load Dynamic Content Based on Modal ID
-function loadModalContent(modalId) {
-    switch (modalId) {
-        case 'poemModal':
-            document.getElementById('poemContent').innerText = generatePoem();
-            break;
-        case 'storyModal':
-            document.getElementById('storyContent').innerText = generateShortStory();
-            break;
-        case 'summaryModal':
-            document.getElementById('summaryContent').innerText = generateSummary();
-            break;
-        case 'readingModal':
-            document.getElementById('readingContent').innerText = generateReadingSuggestions();
-            break;
-    }
-}
-
 // Close modal when clicking anywhere outside the modal content
 window.onclick = function (event) {
     const modals = document.getElementsByClassName("modal");
