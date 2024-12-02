@@ -1,0 +1,418 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9fb; /* Light pastel background */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    background-color: #faf4ff; /* Light lavender pastel */
+}
+
+.header-image {
+    width: 100%;
+    height: auto;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #dfe7ec; /* Soft blue pastel */
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #444;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    color: #6a81ab; /* Slightly deeper pastel color */
+}
+
+main {
+    padding: 20px;
+    background-color: #f9f9fb; /* Light pastel to match header */
+}
+
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f0f5f7; /* Soft mint pastel */
+}
+
+section h2 {
+    color: #6d5a9d; /* Lavender pastel for section titles */
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(25% - 40px); /* Make cards fit evenly */
+    max-width: 300px; /* Ensure cards do not get too large */
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: #6d5a9d;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #6a81ab;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #5b6a91;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #e3eef4; /* Light blush pastel */
+    color: #444;
+}
+/* Existing CSS for Cards and General Layout */
+/* ... (other styles remain the same) ... */
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #444;
+}
+/* Existing CSS for Cards and General Layout */
+/* ... (other styles remain the same) ... */
+
+/* Update for Card Icons */
+.card-icon {
+    width: 100px; /* Set fixed width to 100px */
+    height: 100px; /* Set fixed height to 100px */
+    margin-bottom: 15px;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9fb; /* Light pastel background */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    background-color: #faf4ff; /* Light lavender pastel */
+}
+
+.header-image {
+    width: 100%;
+    height: auto;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #dfe7ec; /* Soft blue pastel */
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #444;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    color: #6a81ab; /* Slightly deeper pastel color */
+}
+
+main {
+    padding: 20px;
+    background-color: #f9f9fb; /* Light pastel to match header */
+}
+
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f0f5f7; /* Soft mint pastel */
+}
+
+section h2 {
+    color: #6d5a9d; /* Lavender pastel for section titles */
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(25% - 40px); /* Make cards fit evenly */
+    max-width: 300px; /* Ensure cards do not get too large */
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card h3 {
+    color: #6d5a9d;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #6a81ab;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #5b6a91;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #e3eef4; /* Light blush pastel */
+    color: #444;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9fb; /* Light pastel background */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    background-color: #faf4ff; /* Light lavender pastel */
+}
+
+.header-image {
+    width: 100%;
+    height: auto;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #dfe7ec; /* Soft blue pastel */
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #444;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    color: #6a81ab; /* Slightly deeper pastel color */
+}
+
+main {
+    padding: 20px;
+    background-color: #f9f9fb; /* Light pastel to match header */
+}
+
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f0f5f7; /* Soft mint pastel */
+}
+
+section h2 {
+    color: #6d5a9d; /* Lavender pastel for section titles */
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(25% - 40px); /* Make cards fit evenly */
+    max-width: 300px; /* Ensure cards do not get too large */
+    text-align: center;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px) rotate(1deg);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.card:hover .card-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card h3 {
+    color: #6d5a9d;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #6a81ab;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #5b6a91;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 5px rgba(106, 129, 171, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(106, 129, 171, 1);
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #e3eef4; /* Light blush pastel */
+    color: #444;
+}

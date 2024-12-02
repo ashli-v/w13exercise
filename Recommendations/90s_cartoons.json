@@ -1,0 +1,183 @@
+[
+    {
+      "title": "The Simpsons",
+      "network": "FOX",
+      "year_created": 1989,
+      "genre": "Comedy"
+    },
+    {
+      "title": "Animaniacs",
+      "network": "FOX / The WB",
+      "year_created": 1993,
+      "genre": "Comedy"
+    },
+    {
+      "title": "Dexter's Laboratory",
+      "network": "Cartoon Network",
+      "year_created": 1996,
+      "genre": ["Comedy", "Science Fiction"]
+    },
+    {
+      "title": "Sailor Moon",
+      "network": "TV Asahi",
+      "year_created": 1992,
+      "genre": ["Anime", "Fantasy"]
+    },
+    {
+      "title": "Batman: The Animated Series",
+      "network": "FOX Kids",
+      "year_created": 1992,
+      "genre": ["Action", "Mystery"]
+    },
+    {
+      "title": "The Powerpuff Girls",
+      "network": "Cartoon Network",
+      "year_created": 1998,
+      "genre": ["Comedy", "Action"]
+    },
+    {
+      "title": "Rugrats",
+      "network": "Nickelodeon",
+      "year_created": 1991,
+      "genre": "Comedy"
+    },
+    {
+      "title": "Dragon Ball Z",
+      "network": "Fuji TV",
+      "year_created": 1989,
+      "genre": ["Anime", "Action"]
+    },
+    {
+      "title": "X-Men: The Animated Series",
+      "network": "FOX Kids",
+      "year_created": 1992,
+      "genre": ["Action", "Science Fiction"]
+    },
+    {
+      "title": "Gargoyles",
+      "network": "ABC",
+      "year_created": 1994,
+      "genre": ["Fantasy", "Drama"]
+    },
+    {
+      "title": "Daria",
+      "network": "MTV",
+      "year_created": 1997,
+      "genre": ["Comedy", "Drama"]
+    },
+    {
+      "title": "Hey Arnold!",
+      "network": "Nickelodeon",
+      "year_created": 1996,
+      "genre": ["Comedy", "Drama"]
+    },
+    {
+      "title": "Johnny Bravo",
+      "network": "Cartoon Network",
+      "year_created": 1997,
+      "genre": "Comedy"
+    },
+    {
+      "title": "Darkwing Duck",
+      "network": "ABC",
+      "year_created": 1991,
+      "genre": ["Action", "Comedy"]
+    },
+    {
+      "title": "Samurai Pizza Cats",
+      "network": "TV Tokyo",
+      "year_created": 1990,
+      "genre": ["Anime", "Comedy"]
+    },
+    {
+      "title": "Pokémon",
+      "network": "TV Tokyo",
+      "year_created": 1997,
+      "genre": ["Anime", "Fantasy"]
+    },
+    {
+      "title": "The Tick",
+      "network": "FOX Kids",
+      "year_created": 1994,
+      "genre": ["Comedy", "Superhero"]
+    },
+    {
+      "title": "Recess",
+      "network": "ABC",
+      "year_created": 1997,
+      "genre": "Comedy"
+    },
+    {
+      "title": "Freakazoid!",
+      "network": "The WB",
+      "year_created": 1995,
+      "genre": ["Comedy", "Superhero"]
+    },
+    {
+      "title": "Courage the Cowardly Dog",
+      "network": "Cartoon Network",
+      "year_created": 1999,
+      "genre": ["Comedy", "Mystery"]
+    },
+    {
+      "title": "South Park",
+      "network": "Comedy Central",
+      "year_created": 1997,
+      "genre": ["Comedy", "Satire"]
+    },
+    {
+      "title": "Spider-Man: The Animated Series",
+      "network": "FOX Kids",
+      "year_created": 1994,
+      "genre": ["Action", "Science Fiction"]
+    },
+    {
+      "title": "Rocko's Modern Life",
+      "network": "Nickelodeon",
+      "year_created": 1993,
+      "genre": "Comedy"
+    },
+    {
+      "title": "Doug",
+      "network": "Nickelodeon / Disney",
+      "year_created": 1991,
+      "genre": ["Comedy", "Drama"]
+    },
+    {
+      "title": "Beast Wars: Transformers",
+      "network": "Syndication",
+      "year_created": 1996,
+      "genre": ["Science Fiction", "Action"]
+    },
+    {
+      "title": "Cardcaptor Sakura",
+      "network": "NHK",
+      "year_created": 1998,
+      "genre": ["Anime", "Fantasy"]
+    },
+    {
+      "title": "The Angry Beavers",
+      "network": "Nickelodeon",
+      "year_created": 1997,
+      "genre": "Comedy"
+    },
+    {
+      "title": "Ed, Edd n Eddy",
+      "network": "Cartoon Network",
+      "year_created": 1999,
+      "genre": "Comedy"
+    },
+    {
+      "title": "The Magic School Bus",
+      "network": "PBS",
+      "year_created": 1994,
+      "genre": ["Educational", "Fantasy"]
+    },
+    {
+      "title": "Goof Troop",
+      "network": "ABC",
+      "year_created": 1992,
+      "genre": "Comedy"
+    }
+  ]
+  

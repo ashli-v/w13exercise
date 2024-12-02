@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery Game</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #022f41;
+        }
+
+        #defaultCanvas0 {
+            border: 2px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let backgroundImage;
+        let currentZone = ""; // Variable to store the name of the current zone
+        let zoneMessage = ""; // Variable to store the message for the clicked zone
+        let showChoice = false; // Flag to display Yes/No choices
+        let score = 0; // Player's score
+        let interactedZones = new Set(); // Set to track interacted zones
+        const totalZones = 5; // Total number of interactive zones
+
+        function preload() {
+            // Load the uploaded background image
+            backgroundImage = loadImage('outdoorgame.jpeg'); // Ensure this file is in the same folder
+        }
+
+        function setup() {
+            // Create the canvas
+            createCanvas(1000, 1000);
+        }
+
+        function draw() {
+            // Check if the adventure is over
+            if (score === totalZones) {
+                displayEndMessage();
+                return;
+            }
+
+            // Draw the light blue background
+            background(173, 216, 230);
+
+            // Draw the background image
+            image(backgroundImage, 0, 0, width, height);
+
+            // Display the score in the top-left corner
+            displayScore();
+
+            // Display current coordinates at the mouse position
+            displayCoordinates();
+
+            // Add mouseover highlights for each interactive zone
+            drawMouseoverZones();
+
+            // Display the name of the current zone at the center of the page
+            displayZoneName();
+
+            // Display the message for the clicked zone
+            displayZoneMessage();
+
+            // Show Yes/No choices if applicable
+            if (showChoice) {
+                displayChoices();
+            }
+        }
+
+        function displayCoordinates() {
+            // Display current mouseX and mouseY at the mouse position
+            fill(0); // Black text
+            textSize(20);
+            textAlign(LEFT, BOTTOM);
+            text(`(${mouseX}, ${mouseY})`, mouseX + 15, mouseY - 10); // Display near the cursor
+        }
+
+        function drawMouseoverZones() {
+            // Check mouse position for each zone and set currentZone if applicable
+
+            // Mountain (top-right area)
+            if (mouseX > 600 && mouseX < 900 && mouseY > 200 && mouseY < 400) {
+                currentZone = "Mountain";
+                highlightZone(600, 200, 300, 200);
+            } 
+            // Stream (adjusted coordinates)
+            else if (mouseX > 424 && mouseX < 770 && mouseY > 762 && mouseY < 860) {
+                currentZone = "Stream";
+                highlightZone(424, 762, 346, 98);
+            } 
+            // Deer (right-middle area)
+            else if (mouseX > 750 && mouseX < 850 && mouseY > 600 && mouseY < 750) {
+                currentZone = "Deer";
+                highlightZone(750, 600, 100, 150);
+            } 
+            // Pink Flowers (updated to new coordinates)
+            else if (mouseX > 49 && mouseX < 223 && mouseY > 840 && mouseY < 956) {
+                currentZone = "Pink Flowers";
+                highlightZone(49, 840, 174, 116);
+            } 
+            // Large Rock (updated to new coordinates)
+            else if (mouseX > 70 && mouseX < 186 && mouseY > 680 && mouseY < 760) {
+                currentZone = "Large Rock";
+                highlightZone(70, 680, 116, 80);
+            } else {
+                currentZone = ""; // Reset if not in any zone
+            }
+        }
+
+        function highlightZone(x, y, w, h) {
+            // Highlight the zone
+            fill(255, 255, 0, 100); // Yellow transparent overlay
+            noStroke();
+            rect(x, y, w, h);
+        }
+
+        function displayZoneName() {
+            if (currentZone !== "") {
+                // Display the name of the zone in large letters at the center
+                fill(0);
+                textSize(48);
+                textAlign(CENTER, CENTER);
+                text(currentZone, width / 2, height / 2);
+            }
+        }
+
+        function displayZoneMessage() {
+            if (zoneMessage !== "") {
+                // Display a white highlight
+                fill(255); // White text background
+                textSize(32);
+                textAlign(CENTER, CENTER);
+                text(zoneMessage, width / 2 + 3, height / 2 + 103); // Offset slightly for highlight
+
+                // Display black foreground text
+                fill(0); // Black text
+                textSize(32);
+                textAlign(CENTER, CENTER);
+                text(zoneMessage, width / 2, height / 2 + 100);
+            }
+        }
+
+        function displayChoices() {
+            // Display Yes/No options on the canvas
+            fill(0);
+            textSize(28);
+            textAlign(CENTER, CENTER);
+            text("Yes", width / 2 - 50, height / 2 + 200);
+            text("No", width / 2 + 50, height / 2 + 200);
+        }
+
+        function displayScore() {
+            // Display the score in the top-left corner
+            fill(0);
+            textSize(24);
+            textAlign(LEFT, TOP);
+            text(`Score: ${score}`, 10, 10);
+        }
+
+        function displayEndMessage() {
+            // Highlight box for "Adventure Over"
+            fill(135, 206, 250); // Sky blue
+            rectMode(CENTER);
+            noStroke();
+            rect(width / 2, height / 2, 400, 100, 10); // Rounded rectangle
+
+            // Display "Adventure Over" text
+            fill(0); // Black text
+            textSize(48);
+            textAlign(CENTER, CENTER);
+            text("Adventure Over", width / 2, height / 2);
+        }
+
+        function mousePressed() {
+            if (score === totalZones) return;
+
+            if (showChoice) {
+                // Handle clicks on Yes/No choices
+                if (mouseX > width / 2 - 70 && mouseX < width / 2 - 30 && mouseY > height / 2 + 180 && mouseY < height / 2 + 220) {
+                    // Clicked Yes
+                    score += 1; // Add 1 point
+                    console.log("Clicked Yes");
+                } else if (mouseX > width / 2 + 30 && mouseX < width / 2 + 70 && mouseY > height / 2 + 180 && mouseY < height / 2 + 220) {
+                    // Clicked No
+                    console.log("Clicked No");
+                }
+                showChoice = false; // Hide choices after selection
+                interactedZones.add(currentZone); // Add the zone to the set of interacted zones
+            } else if (currentZone !== "") {
+                // Display zone-specific message
+                if (currentZone === "Mountain") {
+                    zoneMessage = "Climb the mountain";
+                } else if (currentZone === "Stream") {
+                    zoneMessage = "Cross the stream";
+                } else if (currentZone === "Deer") {
+                    zoneMessage = "Follow the deer";
+                } else if (currentZone === "Pink Flowers") {
+                    zoneMessage = "Pick a flower";
+                } else if (currentZone === "Large Rock") {
+                    zoneMessage = "Sit down";
+                }
+                showChoice = true; // Show Yes/No options
+            }
+        }
+    </script>
+</body>
+</html>

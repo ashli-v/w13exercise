@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>90s Cartoon Finder</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #004d4d;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 5px solid #ff6600;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #ff0066;
+            text-shadow: 2px 2px #fff;
+        }
+        .cartoon {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #ffeb99;
+            border-radius: 10px;
+            border: 2px solid #ff6600;
+        }
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        #ratings-table-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 2px solid #ff6600;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        #recommendations {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #d8bfd8;
+            border-radius: 10px;
+            border: 2px solid #ff66b2;
+        }
+        #recommendation-list .cartoon {
+            background-color: #ffccff;
+            border: 2px solid #ff66b2;
+        }
+        button {
+            background-color: #ff6600;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #ff4500;
+        }
+        input[type="number"] {
+            padding: 5px;
+            font-size: 1em;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>90s Cartoon Finder</h1>
+        <div id="cartoon-list"></div>
+        <button onclick="submitRatings()">Submit Ratings</button>
+        <button onclick="loadMoreCartoons()">Rate 10 More Cartoons</button>
+        <div id="ratings-table-container">
+            <h2>Ratings Summary</h2>
+            <table id="ratings-table">
+                <thead>
+                    <tr>
+                        <th>Rating</th>
+                        <th>Cartoons</th>
+                    </tr>
+                </thead>
+                <tbody id="ratings-table-body">
+                </tbody>
+            </table>
+        </div>
+        <div id="recommendations">
+            <h2>Recommended Cartoons</h2>
+            <div id="recommendation-list"></div>
+            <label for="year-filter">Filter by Year:</label>
+            <input type="number" id="year-filter" min="1990" max="2000" placeholder="e.g. 1995">
+            <button onclick="filterRecommendations()">Filter</button>
+        </div>
+    </div>
+    <script>
+        let genrePreferences = {};
+        let networkRatings = {};
+        let ratedCartoons = [];
+        let topGenres = [];
+        let recommendations = [];
+        let allCartoons = [];
+        let ratingsSummary = {};
+
+        async function loadCartoons() {
+            try {
+                const response = await fetch('90s_cartoons.json');
+                allCartoons = await response.json();
+                displayCartoons(selectRandomCartoons(allCartoons, 10));
+            } catch (error) {
+                console.error('Error loading cartoons:', error);
+            }
+        }
+
+        function selectRandomCartoons(cartoons, count) {
+            const filteredCartoons = cartoons.filter(cartoon => !ratedCartoons.includes(cartoon.title));
+            const shuffled = filteredCartoons.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function displayCartoons(cartoons) {
+            const cartoonList = document.getElementById('cartoon-list');
+            cartoonList.innerHTML = '';
+
+            cartoons.forEach((cartoon, index) => {
+                const cartoonDiv = document.createElement('div');
+                cartoonDiv.classList.add('cartoon');
+
+                cartoonDiv.innerHTML = `
+                    <h3>${cartoon.title} (${cartoon.year_created})</h3>
+                    <p>Network: ${cartoon?.network || 'N/A'} | Genre: ${cartoon?.genre?.join(', ') || 'N/A'}</p>
+                    <form>
+                        <label><input type="radio" name="rating-${index}" value="1"> 1</label>
+                        <label><input type="radio" name="rating-${index}" value="2"> 2</label>
+                        <label><input type="radio" name="rating-${index}" value="3"> 3</label>
+                        <label><input type="radio" name="rating-${index}" value="4"> 4</label>
+                        <label><input type="radio" name="rating-${index}" value="5"> 5</label>
+                        <label><input type="radio" name="rating-${index}" value="haven't-watched"> Haven't watched it</label>
+                    </form>
+                `;
+                cartoonList.appendChild(cartoonDiv);
+            });
+        }
+
+        function submitRatings() {
+            const forms = document.querySelectorAll('form');
+
+            forms.forEach((form, index) => {
+                const selectedRating = form.querySelector('input[type="radio"]:checked');
+                const rating = selectedRating ? selectedRating.value : 'Not rated';
+                const cartoonTitle = form.previousElementSibling.previousElementSibling.textContent;
+                const cartoonGenres = form.previousElementSibling.textContent.match(/Genre: (.*)/)[1].split(', ');
+                const cartoonNetwork = form.previousElementSibling.textContent.match(/Network: (.*) \|/)[1];
+
+                if (!ratingsSummary[rating]) {
+                    ratingsSummary[rating] = [];
+                }
+                ratingsSummary[rating].push(cartoonTitle);
+
+                if (rating >= 3) {
+                    cartoonGenres.forEach(genre => {
+                        genrePreferences[genre] = (genrePreferences[genre] || 0) + 1;
+                    });
+                    networkRatings[cartoonNetwork] = (networkRatings[cartoonNetwork] || 0) + 1;
+                }
+
+                ratedCartoons.push(cartoonTitle);
+            });
+
+            console.log('Ratings Summary:', ratingsSummary);
+            console.log('Genre Preferences:', genrePreferences);
+            console.log('Network Ratings:', networkRatings);
+            alert('Ratings submitted. Check the console for details.');
+            displayRatingsTable();
+            generateRecommendations();
+        }
+
+        function loadMoreCartoons() {
+            displayCartoons(selectRandomCartoons(allCartoons, 10));
+        }
+
+        function displayRatingsTable() {
+            const ratingsTableBody = document.getElementById('ratings-table-body');
+            ratingsTableBody.innerHTML = '';
+
+            Object.keys(ratingsSummary).forEach(rating => {
+                const row = document.createElement('tr');
+                const ratingCell = document.createElement('td');
+                const cartoonsCell = document.createElement('td');
+
+                ratingCell.textContent = rating;
+                cartoonsCell.textContent = ratingsSummary[rating].join(', ');
+
+                row.appendChild(ratingCell);
+                row.appendChild(cartoonsCell);
+                ratingsTableBody.appendChild(row);
+            });
+        }
+
+        async function generateRecommendations() {
+            try {
+                const response = await fetch('90s_cartoons.json');
+                const cartoons = await response.json();
+                topGenres = Object.keys(genrePreferences).sort((a, b) => genrePreferences[b] - genrePreferences[a]).slice(0, 3);
+
+                recommendations = cartoons.filter(cartoon => {
+                    return topGenres.some(genre => cartoon.genre.includes(genre)) && !ratedCartoons.includes(cartoon.title);
+                }).slice(0, 3);
+
+                displayRecommendations();
+            } catch (error) {
+                console.error('Error generating recommendations:', error);
+            }
+        }
+
+        function displayRecommendations() {
+            const recommendationList = document.getElementById('recommendation-list');
+            recommendationList.innerHTML = '';
+
+            recommendations.forEach(cartoon => {
+                const recommendationDiv = document.createElement('div');
+                recommendationDiv.classList.add('cartoon');
+
+                recommendationDiv.innerHTML = `
+                    <h3>${cartoon.title} (${cartoon.year_created})</h3>
+                    <p>Network: ${cartoon.network} | Genre: ${cartoon.genre.join(', ')}</p>
+                `;
+                recommendationList.appendChild(recommendationDiv);
+            });
+        }
+
+        function filterRecommendations() {
+            const year = document.getElementById('year-filter').value;
+            if (year) {
+                const filteredRecommendations = recommendations.filter(cartoon => cartoon.year_created == year);
+                const recommendationList = document.getElementById('recommendation-list');
+                recommendationList.innerHTML = '';
+
+                filteredRecommendations.forEach(cartoon => {
+                    const recommendationDiv = document.createElement('div');
+                    recommendationDiv.classList.add('cartoon');
+
+                    recommendationDiv.innerHTML = `
+                        <h3>${cartoon.title} (${cartoon.year_created})</h3>
+                        <p>Network: ${cartoon.network} | Genre: ${cartoon.genre.join(', ')}</p>
+                    `;
+                    recommendationList.appendChild(recommendationDiv);
+                });
+            } else {
+                displayRecommendations();
+            }
+        }
+
+        window.onload = loadCartoons;
+    </script>
+</body>
+</html>
